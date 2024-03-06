@@ -25,3 +25,8 @@ This application is based on the GitHub API with the base URL `https://api.githu
 3. `/repos/{owner}/{repo}` - Endpoint for getting details about a specific repository.
 
 [githubapp.webm](https://github.com/Gaganpreet1993/github_app/assets/5916001/427ecfd1-5193-4fcd-84bb-c25642e12ab5)
+
+You can download the APK here
+
+[githubapp.zip](https://github.com/Gaganpreet1993/github_app/files/14504291/githubapp.zip)
+
