@@ -1,21 +1,25 @@
 package com.example.githubapp.ui.mainScreen
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubapp.R
 import com.example.githubapp.databinding.ActivityMainBinding
 import com.example.githubapp.common.util.hideKeyboard
+import com.example.githubapp.ui.detailScreen.DetailsActivity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainActivityViewModel
+    private val viewModel: MainActivityViewModel by viewModels()
     private lateinit var repoAdapter: RepoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,8 +27,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
-
-        viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
 
         setUpUI()
         setUpListeners()
@@ -80,7 +82,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpUI() {
-        repoAdapter = RepoAdapter()
+        repoAdapter = RepoAdapter {
+            val intent = Intent(this, DetailsActivity::class.java)
+            intent.putExtra("userName", viewModel.userName.value)
+            intent.putExtra("repoName", it.name)
+            startActivity(intent)
+        }
 
         binding.repoRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.repoRecyclerView.adapter = repoAdapter

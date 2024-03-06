@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.kotlinxParcelize)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -42,7 +44,8 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -50,8 +53,13 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.picasso)
     implementation(libs.gson)
+    implementation(libs.rxandroid)
+    implementation(libs.rxjava)
     implementation(libs.retrofit)
+    implementation(libs.lifecycleViewModelKtx)
+    implementation(libs.activityktx)
     implementation(libs.retrofit.converter.gson)
+    implementation(libs.retrofit.adapter.rxjava)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -16,7 +16,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/searchButton"
             app:errorEnabled="false"
-            android:hint="Enter a github user id">
+            android:hint="@string/enter_a_github_user_id">
 
             <EditText
                 android:id="@+id/editText"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/greyButton"
-            android:text="Search"
+            android:text="@string/search"
             android:textColor="@color/black"
             app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
@@ -46,18 +46,19 @@
             android:id="@+id/profileImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="16dp"
-            android:visibility="gone"
+            android:layout_marginTop="28dp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+            app:layout_constraintTop_toBottomOf="@+id/searchButton"
+            android:contentDescription="@string/profileimage" />
 
         <TextView
             android:id="@+id/profileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/darkGray"

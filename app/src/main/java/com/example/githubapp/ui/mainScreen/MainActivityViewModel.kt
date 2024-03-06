@@ -3,8 +3,19 @@ package com.example.githubapp.ui.mainScreen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.githubapp.domain.RepoInteractor
+import com.example.githubapp.domain.UserInteractor
+import dagger.hilt.android.lifecycle.HiltViewModel
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
+import javax.inject.Inject
 
-class MainActivityViewModel : ViewModel() {
+@HiltViewModel
+class MainActivityViewModel @Inject constructor(
+    private val userInteractor: UserInteractor,
+    private val repoInteractor: RepoInteractor
+
+) : ViewModel() {
 
     private val _repoData = MutableLiveData<List<RepoAdapter.Repo>>()
     val repoData: LiveData<List<RepoAdapter.Repo>> = _repoData
@@ -15,37 +26,21 @@ class MainActivityViewModel : ViewModel() {
     private val _userPhoto = MutableLiveData<String>()
     val userPhoto: LiveData<String> = _userPhoto
 
+    fun fetchUserInfo(userId: String) {
+        val userDataObservable = userInteractor.getUsers(userId)
+        userDataObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe{ userEntityList ->
+            val user = userEntityList[0]
+            _userName.postValue(user.login)
+            _userPhoto.postValue(user.avatarUrl)
+        }
 
-    fun fetchUserInfo(userId: String){
-        _userName.postValue("The Geek")
-        _userPhoto.postValue("https://newprofilepic.photo-cdn.net//assets/images/article/profile.jpg?90af0c8")
     }
-
     fun fetchUserRepos(userId: String) {
-        // Simulate fetching data from API
-        val sampleData = listOf(
-            RepoAdapter.Repo("Repo 1", "Description 1"),
-            RepoAdapter.Repo("Repo 2", "Description 2"),
-            RepoAdapter.Repo("Repo 3", "Description 3"),
-            RepoAdapter.Repo("Repo 1", "Description 1"),
-            RepoAdapter.Repo("Repo 2", "Description 2"),
-            RepoAdapter.Repo("Repo 3", "Description 3"),
-            RepoAdapter.Repo("Repo 1", "Description 1"),
-            RepoAdapter.Repo("Repo 2", "Description 2"),
-            RepoAdapter.Repo("Repo 3", "Description 3"),
-            RepoAdapter.Repo("Repo 1", "Description 1"),
-            RepoAdapter.Repo("Repo 2", "Description 2"),
-            RepoAdapter.Repo("Repo 3", "Description 3"),
-            RepoAdapter.Repo("Repo 1", "Description 1"),
-            RepoAdapter.Repo("Repo 2", "Description 2"),
-            RepoAdapter.Repo("Repo 3", "Description 3"),
-            RepoAdapter.Repo("Repo 1", "Description 1"),
-            RepoAdapter.Repo("Repo 2", "Description 2"),
-            RepoAdapter.Repo("Repo 3", "Description 3"),
-        )
-
-        // Post the sample data to LiveData
-        _repoData.postValue(sampleData)
+        val repoDataObservable = repoInteractor.getRepos(userId)
+        repoDataObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe{ repoEntityList ->
+            val repoList = repoEntityList.map { RepoAdapter.Repo(it.name, it.description) }
+            _repoData.postValue(repoList)
+        }
     }
 
 }

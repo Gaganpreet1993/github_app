@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Take Home</string>
+    <string name="search">Search</string>
+    <string name="profileimage">profileImage</string>
+    <string name="enter_a_github_user_id">Enter a github user id</string>
+    <string name="repo_details">Repo Details</string>
 </resources>
