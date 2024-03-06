@@ -55,7 +55,7 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.rxandroid)
     implementation(libs.rxjava)
-    testImplementation(libs.mockito)
+
     testImplementation(libs.core.testing)
     testImplementation(libs.mockk.android)
     implementation(libs.retrofit)
@@ -65,6 +65,9 @@ dependencies {
     implementation(libs.retrofit.adapter.rxjava)
     testImplementation(libs.junit)
     testImplementation(libs.robolectric)
+    testImplementation(libs.mockito)
+    testImplementation(libs.androidx.test.runner)
+    testImplementation(libs.androidx.test.core)
     androidTestImplementation(libs.androidx.espresso.core)
 
 }

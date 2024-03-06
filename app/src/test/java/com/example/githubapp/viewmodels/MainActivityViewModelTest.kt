@@ -35,22 +35,17 @@ class MainActivityViewModelTest {
 
     @Test
     fun `fetchUserInfo() should update live data with user information`() {
-        // Given
         val userId = "testUserId"
         val expectedUserName = "Test User"
         val expectedUserPhotoUrl = "https://example.com/test.jpg"
 
-        // Mock the observables returned by the interactors
         val userEntityList = listOf(UserEntityData(expectedUserName, 123, expectedUserPhotoUrl))
         `when`(userInteractor.getUsers(userId)).thenReturn(Observable.just(userEntityList).subscribeOn(testScheduler))
 
-        // When
         viewModel.fetchUserInfo(userId)
 
-        // Advance the scheduler to trigger the subscription
         testScheduler.triggerActions()
 
-        // Then
         assert(viewModel.userName.value == expectedUserName)
         assert(viewModel.userPhoto.value == expectedUserPhotoUrl)
     }
