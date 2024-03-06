@@ -6,7 +6,7 @@
     </style>
 
     <style name="Theme.GithubApp" parent="Base.Theme.GithubApp" >
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/hintColor</item>
         <item name="android:actionBarStyle">@style/MyActionBar</item> <!-- Add this line to customize action bar style -->
         <item name="android:textColorPrimary">@android:color/white</item> <!-- Change text color to white -->
 

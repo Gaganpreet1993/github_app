@@ -1,6 +1,7 @@
 package com.example.githubapp.ui.mainScreen
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubapp.R
-import com.example.githubapp.databinding.ActivityMainBinding
 import com.example.githubapp.common.util.hideKeyboard
+import com.example.githubapp.databinding.ActivityMainBinding
 import com.example.githubapp.ui.detailScreen.DetailsActivity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -24,9 +26,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.colorPrimary)))
 
         setUpUI()
         setUpListeners()

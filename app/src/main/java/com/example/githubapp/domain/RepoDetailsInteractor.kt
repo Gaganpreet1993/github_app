@@ -4,7 +4,7 @@ import com.example.githubapp.api.ApiConfig
 import com.example.githubapp.data.RepoDetailsEntityData
 import javax.inject.Inject
 
-class RepoDetailsInteractor @Inject constructor() {
+class RepoDetailsInteractor @Inject constructor(){
     fun getReposDetails(owner: String, repo: String): rx.Observable<RepoDetailsEntityData> =
         ApiConfig.getApiService()
             .getRepoDetails(owner, repo)

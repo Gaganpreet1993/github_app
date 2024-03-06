@@ -1,6 +1,7 @@
 package com.example.githubapp.ui.detailScreen
 
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,8 @@ class DetailsActivity : AppCompatActivity() {
 
         binding = ActivityDetailsBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(getResources().getColor(R.color.colorPrimary)))
+
         setUpObservers()
         val repoName = intent.getStringExtra("repoName") ?: ""
         val userName = intent.getStringExtra("userName") ?: ""

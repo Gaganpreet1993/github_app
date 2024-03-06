@@ -10,7 +10,6 @@ android {
     namespace = "com.example.githubapp"
     compileSdk = 34
 
-
     buildFeatures {
         viewBinding = true
         dataBinding = true
@@ -45,6 +44,7 @@ android {
 
 dependencies {
     implementation(libs.dagger.hilt)
+    implementation(libs.androidx.junit.ktx)
     kapt(libs.dagger.hilt.compiler)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -55,12 +55,16 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.rxandroid)
     implementation(libs.rxjava)
+    testImplementation(libs.mockito)
+    testImplementation(libs.core.testing)
+    testImplementation(libs.mockk.android)
     implementation(libs.retrofit)
     implementation(libs.lifecycleViewModelKtx)
     implementation(libs.activityktx)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.retrofit.adapter.rxjava)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
+    testImplementation(libs.robolectric)
     androidTestImplementation(libs.androidx.espresso.core)
+
 }
